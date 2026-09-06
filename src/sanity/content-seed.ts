@@ -1,5 +1,3 @@
-/** Copy-paste source for Sanity Studio. Used by `npm run seed`. */
-
 export const SEED_SITE_SETTINGS = {
   shortName: "ISDRC",
   fullName: "Inclusive and Sustainable Development Research Center",
