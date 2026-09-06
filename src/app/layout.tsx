@@ -24,10 +24,12 @@ export async function generateMetadata(): Promise<Metadata> {
   const fullName = settings?.fullName || shortName;
   const description = settings?.description || undefined;
 
+  const siteUrl = (
+    process.env.NEXT_PUBLIC_SITE_URL?.trim() || "http://localhost:3000"
+  ).replace(/\/$/, "");
+
   return {
-    metadataBase: new URL(
-      process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"
-    ),
+    metadataBase: new URL(siteUrl),
     title: {
       default: `${shortName} — ${fullName}`,
       template: `%s | ${shortName}`,

@@ -23,7 +23,6 @@ Feature merges to `main` do **not** deploy to production. Only a completed Relea
 | Secret                          | Purpose                                        |
 | ------------------------------- | ---------------------------------------------- |
 | `NEXT_PUBLIC_SANITY_PROJECT_ID` | Sanity project for production build            |
-| `NEXT_PUBLIC_SITE_URL`          | Canonical site URL                             |
 | `VERCEL_TOKEN`                  | Vercel deploy token                            |
 | `VERCEL_ORG_ID`                 | Vercel org/team id                             |
 | `VERCEL_PROJECT_ID`             | Vercel project id                              |
