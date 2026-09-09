@@ -32,6 +32,16 @@ Feature merges to `main` do **not** deploy to production. Only a completed Relea
 
 Create a GitHub Environment named **`production`** (Settings → Environments) so the deploy job can use it for protection rules / reviewers if you want.
 
+### Vercel project env (not Actions secrets)
+
+Production builds run on Vercel, not in Actions, so set the canonical site URL on the Vercel project (and in `.env.local` for local):
+
+| Variable               | Purpose                                                                                     |
+| ---------------------- | ------------------------------------------------------------------------------------------- |
+| `NEXT_PUBLIC_SITE_URL` | Production origin (e.g. `https://example.com`) — used for `metadataBase` / absolute OG URLs |
+
+If unset, the app falls back to `http://localhost:3000`.
+
 ## Files
 
 - [`release-please-config.json`](../release-please-config.json)
