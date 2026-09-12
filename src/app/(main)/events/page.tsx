@@ -38,9 +38,22 @@ export default async function EventsPage() {
 
       <div className="mx-auto max-w-7xl px-6 py-14 md:px-16">
         {events.length === 0 ? (
-          <p className="rounded-sm border border-dashed border-border bg-muted/40 px-6 py-12 text-center text-sm text-muted-foreground">
-            No events yet.
-          </p>
+          <div className="rounded-sm border border-dashed border-border bg-muted/40 px-6 py-14 text-center">
+            <p className="font-heading text-lg font-bold tracking-tight text-isdrc-navy md:text-xl">
+              No upcoming events
+            </p>
+            <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-muted-foreground">
+              Check back soon for conferences, workshops, and stakeholder
+              convenings. You can also{" "}
+              <Link
+                href="/connect"
+                className="font-semibold text-isdrc-navy underline-offset-2 hover:underline"
+              >
+                contact us
+              </Link>{" "}
+              to learn about future programmes.
+            </p>
+          </div>
         ) : (
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {events.map((event) => {

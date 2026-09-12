@@ -2,7 +2,7 @@ import { defineField, defineType } from "sanity";
 
 export const connectPage = defineType({
   name: "connectPage",
-  title: "Connect Page",
+  title: "Contact Page",
   type: "document",
   fields: [
     defineField({
@@ -15,7 +15,7 @@ export const connectPage = defineType({
       name: "title",
       title: "Page Title",
       type: "string",
-      initialValue: "Get Connected",
+      initialValue: "Contact Us",
     }),
     defineField({
       name: "intro",
@@ -25,6 +25,6 @@ export const connectPage = defineType({
     }),
   ],
   preview: {
-    prepare: () => ({ title: "Connect Page" }),
+    prepare: () => ({ title: "Contact Page" }),
   },
 });

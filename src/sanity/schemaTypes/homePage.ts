@@ -19,6 +19,41 @@ export const homePage = defineType({
       description: "Short sentence under the organisation name in the hero",
     }),
     defineField({
+      name: "heroCtas",
+      title: "Hero buttons",
+      type: "array",
+      description: "Buttons under the hero lead — each needs a label and URL",
+      of: [
+        {
+          type: "object",
+          name: "heroCta",
+          title: "Button",
+          fields: [
+            defineField({
+              name: "label",
+              title: "Label",
+              type: "string",
+              validation: (Rule) => Rule.required(),
+            }),
+            defineField({
+              name: "url",
+              title: "URL",
+              type: "string",
+              description: "Internal path (e.g. /#who-we-are) or full URL",
+              validation: (Rule) => Rule.required(),
+            }),
+          ],
+          preview: {
+            select: { title: "label", subtitle: "url" },
+          },
+        },
+      ],
+      initialValue: [
+        { label: "Our approach", url: "/#who-we-are" },
+        { label: "Contact us", url: "/connect" },
+      ],
+    }),
+    defineField({
       name: "aboutEyebrow",
       title: "About Eyebrow",
       type: "string",

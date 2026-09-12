@@ -24,7 +24,14 @@ export default async function MainLayout({
         tagline={settings?.tagline || ""}
         description={settings?.description || ""}
         contactEmail={settings?.contactEmail || ""}
+        physicalAddress={settings?.physicalAddress || ""}
         logoUrl={settings?.logoUrl || "/images/logo.png"}
+        linksHeading={settings?.footer?.linksHeading || "Quick Links"}
+        contactHeading={settings?.footer?.contactHeading || "Contact Us"}
+        contactButtonLabel={
+          settings?.footer?.contactButtonLabel || "Contact Us"
+        }
+        socialLinks={settings?.socialLinks || []}
       />
     </div>
   );

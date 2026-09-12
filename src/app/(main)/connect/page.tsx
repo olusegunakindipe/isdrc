@@ -7,7 +7,7 @@ import { getConnectPage, getSiteSettings } from "@/sanity/lib/fetch";
 export async function generateMetadata(): Promise<Metadata> {
   const page = await getConnectPage();
   return {
-    title: page?.title || "Get Connected",
+    title: page?.title || "Contact Us",
     description: page?.intro || undefined,
   };
 }
@@ -18,13 +18,14 @@ export default async function ConnectPage() {
     getSiteSettings(),
   ]);
   const email = settings?.contactEmail;
+  const address = settings?.physicalAddress;
 
   return (
     <>
       <PageHero
         src={page?.heroImageUrl || "/images/hero-connect.jpg"}
         alt=""
-        title={page?.title || "Get Connected"}
+        title={page?.title || "Contact Us"}
         subtitle={page?.intro || undefined}
       />
 
@@ -37,15 +38,25 @@ export default async function ConnectPage() {
               </p>
             )}
             {email && (
-              <p className="text-sm leading-relaxed text-slate-700">
-                Email{" "}
+              <p className="mb-3 text-sm leading-relaxed text-slate-700">
+                <span className="font-semibold text-isdrc-navy">Email:</span>{" "}
                 <a
                   href={`mailto:${email}`}
                   className="font-semibold text-isdrc-navy underline-offset-2 hover:underline"
                 >
                   {email}
-                </a>{" "}
-                or fill out the form.
+                </a>
+              </p>
+            )}
+            {address && (
+              <p className="mb-3 whitespace-pre-line text-sm leading-relaxed text-slate-700">
+                <span className="font-semibold text-isdrc-navy">Address:</span>{" "}
+                {address}
+              </p>
+            )}
+            {(email || address) && (
+              <p className="text-sm leading-relaxed text-slate-700">
+                Or fill out the form.
               </p>
             )}
           </div>

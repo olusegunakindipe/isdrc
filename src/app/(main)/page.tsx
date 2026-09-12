@@ -71,24 +71,41 @@ export default async function HomePage() {
               {home.heroLead}
             </p>
           )}
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Button
-              asChild
-              className="rounded-sm bg-isdrc-green px-7 font-semibold tracking-wide text-white hover:bg-[#245628]"
-            >
-              <Link href="/#approach">
-                Our approach
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
-            <Button
-              asChild
-              variant="outline"
-              className="rounded-sm border-white/70 bg-transparent px-7 font-semibold tracking-wide text-white hover:bg-white hover:text-isdrc-navy"
-            >
-              <Link href="/connect">Get connected</Link>
-            </Button>
-          </div>
+          {(() => {
+            const heroCtas =
+              home?.heroCtas?.filter(
+                (cta) => cta?.label?.trim() && cta?.url?.trim()
+              ) ?? [];
+            const buttons =
+              heroCtas.length > 0
+                ? heroCtas
+                : [
+                    { label: "Our approach", url: "/#who-we-are" },
+                    { label: "Contact us", url: "/connect" },
+                  ];
+
+            return (
+              <div className="mt-8 flex flex-wrap gap-3">
+                {buttons.map((cta, index) => (
+                  <Button
+                    key={`${cta.label}-${index}`}
+                    asChild
+                    variant={index === 0 ? "default" : "outline"}
+                    className={
+                      index === 0
+                        ? "rounded-sm bg-isdrc-green px-7 font-semibold tracking-wide text-white hover:bg-[#245628]"
+                        : "rounded-sm border-white/70 bg-transparent px-7 font-semibold tracking-wide text-white hover:bg-white hover:text-isdrc-navy"
+                    }
+                  >
+                    <Link href={cta.url!.trim()}>
+                      {cta.label!.trim()}
+                      {index === 0 && <ArrowRight className="ml-2 h-4 w-4" />}
+                    </Link>
+                  </Button>
+                ))}
+              </div>
+            );
+          })()}
         </div>
       </section>
 
@@ -132,9 +149,9 @@ export default async function HomePage() {
       )}
 
       <section
-        id="approach"
+        id="who-we-are"
         className="scroll-mt-24 bg-isdrc-light py-16 md:py-20"
-        aria-labelledby="approach-heading"
+        aria-labelledby="who-we-are-heading"
       >
         <div className="mx-auto max-w-7xl px-6 md:px-16">
           {(home?.approachEyebrow || home?.approachHeading) && (
@@ -146,7 +163,7 @@ export default async function HomePage() {
               )}
               {home?.approachHeading && (
                 <h2
-                  id="approach-heading"
+                  id="who-we-are-heading"
                   className="font-heading text-3xl font-bold tracking-tight text-isdrc-navy md:text-4xl"
                 >
                   {home.approachHeading}
@@ -156,8 +173,8 @@ export default async function HomePage() {
           )}
 
           {!home?.approachHeading && (
-            <h2 id="approach-heading" className="sr-only">
-              Approach
+            <h2 id="who-we-are-heading" className="sr-only">
+              Who we are
             </h2>
           )}
 
