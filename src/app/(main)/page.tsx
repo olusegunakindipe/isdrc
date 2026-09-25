@@ -42,7 +42,7 @@ export default async function HomePage() {
   return (
     <>
       <section
-        className="relative flex min-h-[78vh] w-full items-end overflow-hidden md:min-h-[88vh]"
+        className="relative flex min-h-[78vh] w-full items-end overflow-hidden md:min-h-[min(88vh,820px)]"
         aria-label="Home overview"
       >
         <Image
@@ -184,14 +184,11 @@ export default async function HomePage() {
             </p>
           ) : (
             <div className="grid gap-8 sm:grid-cols-2">
-              {pillars.map((pillar, index) => (
+              {pillars.map((pillar) => (
                 <article
                   key={pillar._id}
                   className="border-t-2 border-isdrc-navy/15 pt-6"
                 >
-                  <p className="mb-2 text-xs font-semibold tracking-widest text-isdrc-gold uppercase">
-                    {String(index + 1).padStart(2, "0")}
-                  </p>
                   <h3 className="font-heading mb-3 text-xl font-bold text-isdrc-navy">
                     {pillar.title}
                   </h3>

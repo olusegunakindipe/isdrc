@@ -150,30 +150,32 @@ export function Footer({
               {linksHeading}
             </h3>
             <ul className="grid grid-cols-2 gap-x-4 gap-y-6" role="list">
-              {NAV_ITEMS.map((item) => (
-                <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    className="text-sm font-medium tracking-wide text-slate-700 uppercase transition-colors hover:text-isdrc-navy"
-                  >
-                    {item.label}
-                  </Link>
-                  {"children" in item && item.children && (
-                    <ul className="mt-1 ml-3 flex flex-col gap-1" role="list">
-                      {item.children.map((child) => (
-                        <li key={child.href}>
-                          <Link
-                            href={child.href}
-                            className="text-xs text-slate-600 transition-colors hover:text-isdrc-navy"
-                          >
-                            {child.label}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </li>
-              ))}
+              {NAV_ITEMS.filter((item) => item.href !== "/connect").map(
+                (item) => (
+                  <li key={item.href}>
+                    <Link
+                      href={item.href}
+                      className="text-sm font-medium tracking-wide text-slate-700 uppercase transition-colors hover:text-isdrc-navy"
+                    >
+                      {item.label}
+                    </Link>
+                    {"children" in item && item.children && (
+                      <ul className="mt-1 ml-3 flex flex-col gap-1" role="list">
+                        {item.children.map((child) => (
+                          <li key={child.href}>
+                            <Link
+                              href={child.href}
+                              className="text-xs text-slate-600 transition-colors hover:text-isdrc-navy"
+                            >
+                              {child.label}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </li>
+                )
+              )}
             </ul>
           </div>
 
