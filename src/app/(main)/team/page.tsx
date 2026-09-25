@@ -1,7 +1,9 @@
+import { Fragment } from "react";
+
 import type { Metadata } from "next";
-import Image from "next/image";
 
 import { PageHero } from "@/components/layout/page-hero";
+import { TeamMemberCard } from "@/components/team-member-card";
 import { Separator } from "@/components/ui/separator";
 import { getTeamMembers, getTeamPage } from "@/sanity/lib/fetch";
 
@@ -31,48 +33,19 @@ export default async function TeamPage() {
             Team profiles will appear here once published in Studio.
           </p>
         ) : (
-          <div className="flex flex-col gap-12">
+          <div className="grid gap-x-12 gap-y-10 sm:grid-cols-2">
             {members.map((member, i) => (
-              <div key={member._id}>
-                <div className="flex flex-col gap-6 md:flex-row md:items-start">
-                  <div className="flex-shrink-0">
-                    <div className="relative h-36 w-36 overflow-hidden rounded-full border-4 border-isdrc-navy/15 bg-isdrc-light shadow-sm">
-                      {member.photoUrl ? (
-                        <Image
-                          src={member.photoUrl}
-                          alt={`${member.name} — ${member.role}`}
-                          fill
-                          sizes="144px"
-                          className="object-cover"
-                        />
-                      ) : (
-                        <div className="flex h-full w-full items-center justify-center text-2xl font-bold text-isdrc-navy">
-                          {member.name
-                            .split(" ")
-                            .map((n) => n[0])
-                            .slice(0, 2)
-                            .join("")}
-                        </div>
-                      )}
-                    </div>
-                  </div>
-
-                  <div className="flex-1 pt-1">
-                    <h2 className="font-heading text-xl font-bold tracking-tight text-isdrc-navy">
-                      {member.name}
-                    </h2>
-                    <p className="mb-3 text-sm font-semibold text-isdrc-green">
-                      {member.role}
-                    </p>
-                    {member.bio && (
-                      <p className="max-w-3xl text-sm leading-relaxed text-slate-700 md:text-base">
-                        {member.bio}
-                      </p>
-                    )}
-                  </div>
-                </div>
-                {i < members.length - 1 && <Separator className="mt-12" />}
-              </div>
+              <Fragment key={member._id}>
+                <TeamMemberCard
+                  name={member.name}
+                  role={member.role}
+                  bio={member.bio}
+                  photoUrl={member.photoUrl}
+                />
+                {i % 2 === 1 && i < members.length - 1 && (
+                  <Separator className="col-span-full bg-isdrc-navy/15" />
+                )}
+              </Fragment>
             ))}
           </div>
         )}

@@ -1,8 +1,8 @@
 // Site-wide nav config — structure only (labels/routes). Content comes from Sanity.
 export const NAV_ITEMS = [
   {
-    label: "Approach",
-    href: "/#approach",
+    label: "Home",
+    href: "/",
   },
   {
     label: "Publications",
@@ -13,11 +13,7 @@ export const NAV_ITEMS = [
     href: "/events",
   },
   {
-    label: "Press",
-    href: "/press",
-  },
-  {
-    label: "About Us",
+    label: "People & Partners",
     href: "/team",
     children: [
       { label: "Team", href: "/team" },
@@ -26,7 +22,7 @@ export const NAV_ITEMS = [
     ],
   },
   {
-    label: "Get Connected",
+    label: "Contact Us",
     href: "/connect",
   },
 ] as const;

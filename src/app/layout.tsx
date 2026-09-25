@@ -24,10 +24,20 @@ export async function generateMetadata(): Promise<Metadata> {
   const fullName = settings?.fullName || shortName;
   const description = settings?.description || undefined;
 
+  const fallbackUrl = "http://localhost:3000";
+  const rawSiteUrl = (
+    process.env.NEXT_PUBLIC_SITE_URL?.trim() || fallbackUrl
+  ).replace(/\/$/, "");
+
+  let metadataBase: URL;
+  try {
+    metadataBase = new URL(rawSiteUrl);
+  } catch {
+    metadataBase = new URL(fallbackUrl);
+  }
+
   return {
-    metadataBase: new URL(
-      process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"
-    ),
+    metadataBase,
     title: {
       default: `${shortName} — ${fullName}`,
       template: `%s | ${shortName}`,

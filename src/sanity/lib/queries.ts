@@ -7,8 +7,16 @@ export const siteSettingsQuery = groq`
     tagline,
     description,
     contactEmail,
-    twitterUrl,
-    linkedinUrl,
+    physicalAddress,
+    socialLinks[]{
+      platform,
+      url
+    },
+    footer{
+      linksHeading,
+      contactHeading,
+      contactButtonLabel
+    },
     "logoUrl": logo.asset->url
   }
 `;
@@ -16,6 +24,10 @@ export const siteSettingsQuery = groq`
 export const homePageQuery = groq`
   *[_type == "homePage"][0]{
     heroLead,
+    heroCtas[]{
+      label,
+      url
+    },
     aboutEyebrow,
     aboutHeading,
     missionParagraphs,
@@ -70,18 +82,6 @@ export const partnersQuery = groq`
   }
 `;
 
-export const publicationsQuery = groq`
-  *[_type == "publication"] | order(publishedAt desc) {
-    _id,
-    title,
-    "slug": slug.current,
-    summary,
-    publishedAt,
-    externalUrl,
-    "imageUrl": image.asset->url
-  }
-`;
-
 export const eventsQuery = groq`
   *[_type == "event"] | order(startDate desc) {
     _id,
@@ -92,17 +92,6 @@ export const eventsQuery = groq`
     location,
     externalUrl,
     "imageUrl": image.asset->url
-  }
-`;
-
-export const pressItemsQuery = groq`
-  *[_type == "pressItem"] | order(publishedAt desc) {
-    _id,
-    title,
-    outlet,
-    publishedAt,
-    url,
-    summary
   }
 `;
 
@@ -142,20 +131,19 @@ export const publicationsPageQuery = groq`
   *[_type == "publicationsPage"][0]{
     title,
     intro,
-    "heroImageUrl": heroImage.asset->url
+    listHeading,
+    "heroImageUrl": heroImage.asset->url,
+    items[]{
+      title,
+      externalUrl,
+      "fileUrl": file.asset->url,
+      "fileName": file.asset->originalFilename
+    }
   }
 `;
 
 export const eventsPageQuery = groq`
   *[_type == "eventsPage"][0]{
-    title,
-    intro,
-    "heroImageUrl": heroImage.asset->url
-  }
-`;
-
-export const pressPageQuery = groq`
-  *[_type == "pressPage"][0]{
     title,
     intro,
     "heroImageUrl": heroImage.asset->url

@@ -1,15 +1,28 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
-
-import { Calendar, ExternalLink } from "lucide-react";
 
 import { PageHero } from "@/components/layout/page-hero";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { formatDate } from "@/lib/format-date";
-import { getPublications, getPublicationsPage } from "@/sanity/lib/fetch";
+import { getPublicationsPage } from "@/sanity/lib/fetch";
+
+function getFileKind(
+  fileUrl?: string | null,
+  fileName?: string | null
+): "pdf" | "word" | null {
+  if (!fileUrl) return null;
+  const name = (fileName || fileUrl).toLowerCase();
+  if (name.endsWith(".pdf") || name.includes("application/pdf")) return "pdf";
+  if (
+    name.endsWith(".doc") ||
+    name.endsWith(".docx") ||
+    name.includes("msword") ||
+    name.includes("wordprocessingml")
+  ) {
+    return "word";
+  }
+  return null;
+}
 
 export async function generateMetadata(): Promise<Metadata> {
   const page = await getPublicationsPage();
@@ -20,10 +33,8 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function PublicationsPage() {
-  const [page, publications] = await Promise.all([
-    getPublicationsPage(),
-    getPublications(),
-  ]);
+  const page = await getPublicationsPage();
+  const items = page?.items?.filter((item) => item?.title) ?? [];
 
   return (
     <>
@@ -35,93 +46,59 @@ export default async function PublicationsPage() {
       />
 
       <div className="mx-auto max-w-7xl px-6 py-14 md:px-16">
-        {publications.length === 0 ? (
+        <h2 className="font-heading mb-10 text-2xl font-bold tracking-tight text-isdrc-navy md:text-3xl">
+          {page?.listHeading || "List of Publications"}
+        </h2>
+
+        {items.length === 0 ? (
           <p className="rounded-sm border border-dashed border-border bg-muted/40 px-6 py-12 text-center text-sm text-muted-foreground">
             No publications yet.
           </p>
         ) : (
-          <div className="flex flex-col gap-12">
-            {publications.map((pub, i) => {
-              const href = pub.externalUrl || undefined;
-              const dateLabel = formatDate(pub.publishedAt);
+          <ul className="flex flex-col" role="list">
+            {items.map((item, i) => {
+              const fileKind = getFileKind(item.fileUrl, item.fileName);
+              const isFile = Boolean(item.fileUrl);
+              const href = item.fileUrl || item.externalUrl || undefined;
+              const fileLabel =
+                fileKind === "pdf"
+                  ? "PDF"
+                  : fileKind === "word"
+                    ? "Word"
+                    : null;
 
               return (
-                <article key={pub._id} aria-labelledby={`pub-title-${pub._id}`}>
-                  <div className="flex flex-col gap-6 md:flex-row">
-                    {pub.imageUrl && (
-                      <div className="relative h-52 w-full flex-shrink-0 overflow-hidden rounded-sm md:h-auto md:w-64">
-                        <Image
-                          src={pub.imageUrl}
-                          alt={pub.title}
-                          fill
-                          sizes="(max-width: 768px) 100vw, 256px"
-                          className="object-cover"
-                        />
-                      </div>
-                    )}
-
-                    <div className="flex flex-1 flex-col gap-3">
-                      <h2
-                        id={`pub-title-${pub._id}`}
-                        className="font-heading text-lg leading-snug font-bold tracking-tight text-isdrc-navy md:text-xl"
-                      >
-                        {href ? (
-                          <Link
-                            href={href}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="transition-colors hover:text-isdrc-green"
-                          >
-                            {pub.title}
-                          </Link>
-                        ) : (
-                          pub.title
-                        )}
-                      </h2>
-
-                      {dateLabel && (
-                        <div className="flex items-center gap-1.5">
-                          <Calendar className="h-3.5 w-3.5 text-isdrc-green" />
-                          <Badge
-                            variant="outline"
-                            className="border-0 p-0 text-xs font-semibold text-isdrc-green"
-                          >
-                            {dateLabel}
-                          </Badge>
-                        </div>
-                      )}
-
-                      {pub.summary && (
-                        <p className="max-w-3xl text-sm leading-relaxed text-slate-700">
-                          {pub.summary}
-                        </p>
-                      )}
-
-                      {href && (
-                        <Button
-                          asChild
-                          size="sm"
-                          className="mt-1 w-fit rounded-sm bg-isdrc-green px-5 font-semibold text-white hover:bg-[#245628]"
+                <li key={`${item.title}-${i}`}>
+                  <div className="flex flex-wrap items-baseline gap-x-3 gap-y-2">
+                    <h3 className="font-heading text-lg leading-snug font-bold tracking-tight text-isdrc-navy md:text-xl">
+                      {href ? (
+                        <Link
+                          href={href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="underline-offset-4 transition-colors hover:text-isdrc-green hover:underline"
+                          {...(isFile ? { download: true } : {})}
                         >
-                          <Link
-                            href={href}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            Read more
-                            <ExternalLink className="ml-1.5 h-3.5 w-3.5" />
-                          </Link>
-                        </Button>
+                          {item.title}
+                        </Link>
+                      ) : (
+                        item.title
                       )}
-                    </div>
+                    </h3>
+                    {fileLabel && (
+                      <Badge
+                        variant="outline"
+                        className="rounded-sm border-isdrc-navy/20 text-xs font-semibold tracking-wide text-isdrc-navy uppercase"
+                      >
+                        {fileLabel}
+                      </Badge>
+                    )}
                   </div>
-                  {i < publications.length - 1 && (
-                    <Separator className="mt-12" />
-                  )}
-                </article>
+                  {i < items.length - 1 && <Separator className="my-8" />}
+                </li>
               );
             })}
-          </div>
+          </ul>
         )}
       </div>
     </>

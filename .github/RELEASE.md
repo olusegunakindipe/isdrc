@@ -20,18 +20,27 @@ Feature merges to `main` do **not** deploy to production. Only a completed Relea
 
 ### Repository secrets (Settings → Secrets and variables → Actions)
 
-| Secret | Purpose |
-| --- | --- |
-| `NEXT_PUBLIC_SANITY_PROJECT_ID` | Sanity project for production build |
-| `NEXT_PUBLIC_SITE_URL` | Canonical site URL |
-| `VERCEL_TOKEN` | Vercel deploy token |
-| `VERCEL_ORG_ID` | Vercel org/team id |
-| `VERCEL_PROJECT_ID` | Vercel project id |
-| `RELEASE_PLEASE_TOKEN` | Optional PAT with `contents` + `pull-requests` |
+| Secret                          | Purpose                                        |
+| ------------------------------- | ---------------------------------------------- |
+| `NEXT_PUBLIC_SANITY_PROJECT_ID` | Sanity project for production build            |
+| `VERCEL_TOKEN`                  | Vercel deploy token                            |
+| `VERCEL_ORG_ID`                 | Vercel org/team id                             |
+| `VERCEL_PROJECT_ID`             | Vercel project id                              |
+| `RELEASE_PLEASE_TOKEN`          | Optional PAT with `contents` + `pull-requests` |
 
 ### Environment
 
 Create a GitHub Environment named **`production`** (Settings → Environments) so the deploy job can use it for protection rules / reviewers if you want.
+
+### Vercel project env (not Actions secrets)
+
+Production builds run on Vercel, not in Actions, so set the canonical site URL on the Vercel project (and in `.env.local` for local):
+
+| Variable               | Purpose                                                                                     |
+| ---------------------- | ------------------------------------------------------------------------------------------- |
+| `NEXT_PUBLIC_SITE_URL` | Production origin (e.g. `https://example.com`) — used for `metadataBase` / absolute OG URLs |
+
+If unset, the app falls back to `http://localhost:3000`.
 
 ## Files
 

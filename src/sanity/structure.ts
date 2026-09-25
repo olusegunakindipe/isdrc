@@ -3,13 +3,12 @@ import type { StructureResolver } from "sanity/structure";
 const SINGLETONS = [
   { id: "siteSettings", title: "Site Settings" },
   { id: "homePage", title: "Home Page" },
-  { id: "connectPage", title: "Connect Page" },
+  { id: "connectPage", title: "Contact Page" },
   { id: "teamPage", title: "Team Page" },
   { id: "advisoryPage", title: "Advisory Board Page" },
   { id: "partnershipsPage", title: "Partnerships Page" },
   { id: "publicationsPage", title: "Publications Page" },
   { id: "eventsPage", title: "Events Page" },
-  { id: "pressPage", title: "Press Page" },
 ] as const;
 
 export const structure: StructureResolver = (S) =>
@@ -32,10 +31,10 @@ export const structure: StructureResolver = (S) =>
         ),
       S.divider(),
       S.listItem()
-        .title("About")
+        .title("People & Partners")
         .child(
           S.list()
-            .title("About")
+            .title("People & Partners")
             .items([
               S.documentTypeListItem("approachPillar").title(
                 "Approach Pillars"
@@ -52,10 +51,6 @@ export const structure: StructureResolver = (S) =>
         .child(
           S.list()
             .title("Research & Updates")
-            .items([
-              S.documentTypeListItem("publication").title("Publications"),
-              S.documentTypeListItem("event").title("Events"),
-              S.documentTypeListItem("pressItem").title("Press Items"),
-            ])
+            .items([S.documentTypeListItem("event").title("Events")])
         ),
     ]);

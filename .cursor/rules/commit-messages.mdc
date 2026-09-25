@@ -1,0 +1,37 @@
+---
+description: Commit message format — subject, summary, bullet list
+alwaysApply: true
+---
+
+# Git commit messages
+
+When creating a git commit, use this shape (Conventional Commits subject + detailed body):
+
+1. **Subject** — concise imperative line (`type: summary`), ~72 chars
+2. **Blank line**
+3. **Optional one-line why** (context)
+4. **Bullet list** — concrete changes (what landed), one bullet per meaningful change
+
+## Example
+
+```
+fix: harden site URL fallback and remove Sanity seed tooling
+
+Production metadata should not depend on Actions secrets or crash on bad env.
+
+- Document NEXT_PUBLIC_SITE_URL on Vercel in RELEASE.md
+- Guard metadataBase with try/catch + localhost fallback
+- Remove unused Sanity seed scripts and npm seed command
+- Add design/plan docs under docs/superpowers/
+```
+
+## Do
+
+- Prefer bullets over a single dense paragraph
+- Focus bullets on user-visible / operator-visible outcomes
+- Keep the subject accurate (`fix` / `feat` / `docs` / `chore` as appropriate)
+
+## Don't
+
+- Subject-only commits when more than one file or concern changed
+- Vague bullets ("update stuff", "misc fixes")

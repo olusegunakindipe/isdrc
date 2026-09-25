@@ -10,10 +10,7 @@ import {
   homePageQuery,
   partnersQuery,
   partnershipsPageQuery,
-  pressItemsQuery,
-  pressPageQuery,
   publicationsPageQuery,
-  publicationsQuery,
   siteSettingsQuery,
   teamMembersQuery,
   teamPageQuery,
@@ -37,19 +34,30 @@ async function fetchList<T>(query: string): Promise<T[]> {
   }
 }
 
+export type SocialLink = {
+  platform?: "twitter" | "linkedin" | "tiktok" | string | null;
+  url?: string | null;
+};
+
 export type SiteSettings = {
   shortName?: string | null;
   fullName?: string | null;
   tagline?: string | null;
   description?: string | null;
   contactEmail?: string | null;
-  twitterUrl?: string | null;
-  linkedinUrl?: string | null;
+  physicalAddress?: string | null;
+  socialLinks?: SocialLink[] | null;
+  footer?: {
+    linksHeading?: string | null;
+    contactHeading?: string | null;
+    contactButtonLabel?: string | null;
+  } | null;
   logoUrl?: string | null;
 };
 
 export type HomePage = {
   heroLead?: string | null;
+  heroCtas?: { label?: string; url?: string }[] | null;
   aboutEyebrow?: string | null;
   aboutHeading?: string | null;
   missionParagraphs?: string[] | null;
@@ -106,6 +114,18 @@ export async function getAdvisoryMembers() {
   }>(advisoryMembersQuery);
 }
 
+export type PublicationItem = {
+  title: string;
+  externalUrl?: string;
+  fileUrl?: string | null;
+  fileName?: string | null;
+};
+
+export type PublicationsPage = PageMeta & {
+  listHeading?: string | null;
+  items?: PublicationItem[] | null;
+};
+
 export async function getPartners() {
   return fetchList<{
     _id: string;
@@ -115,18 +135,6 @@ export async function getPartners() {
     logoUrl?: string | null;
     order?: number;
   }>(partnersQuery);
-}
-
-export async function getPublications() {
-  return fetchList<{
-    _id: string;
-    title: string;
-    slug?: string;
-    summary?: string;
-    publishedAt?: string;
-    externalUrl?: string;
-    imageUrl?: string | null;
-  }>(publicationsQuery);
 }
 
 export async function getEvents() {
@@ -140,17 +148,6 @@ export async function getEvents() {
     externalUrl?: string;
     imageUrl?: string | null;
   }>(eventsQuery);
-}
-
-export async function getPressItems() {
-  return fetchList<{
-    _id: string;
-    title: string;
-    outlet?: string;
-    publishedAt?: string;
-    url?: string;
-    summary?: string;
-  }>(pressItemsQuery);
 }
 
 export async function getConnectPage() {
@@ -170,13 +167,9 @@ export async function getPartnershipsPage() {
 }
 
 export async function getPublicationsPage() {
-  return fetchOrNull<PageMeta>(publicationsPageQuery);
+  return fetchOrNull<PublicationsPage>(publicationsPageQuery);
 }
 
 export async function getEventsPage() {
   return fetchOrNull<PageMeta>(eventsPageQuery);
-}
-
-export async function getPressPage() {
-  return fetchOrNull<PageMeta>(pressPageQuery);
 }
