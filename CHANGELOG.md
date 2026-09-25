@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/olusegunakindipe/isdrc/compare/v0.2.0...v0.3.0) (2026-09-25)
+
+
+### Features
+
+* add Sanity webhook route for on-demand revalidation ([#5](https://github.com/olusegunakindipe/isdrc/issues/5)) ([4e77664](https://github.com/olusegunakindipe/isdrc/commit/4e77664afe4b05ea68f12f95cae6c9195d89cc13))
+
 ## [0.2.0](https://github.com/olusegunakindipe/isdrc/compare/v0.1.0...v0.2.0) (2026-09-25)
 
 
