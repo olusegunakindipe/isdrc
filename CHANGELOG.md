@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.2](https://github.com/olusegunakindipe/isdrc/compare/v0.3.1...v0.3.2) (2026-09-26)
+
+
+### Bug Fixes
+
+* use first+last name for initials avatar fallback ([#9](https://github.com/olusegunakindipe/isdrc/issues/9)) ([d7fa1cb](https://github.com/olusegunakindipe/isdrc/commit/d7fa1cba57f28aeb757e060275e4cc984c928315))
+
 ## [0.3.1](https://github.com/olusegunakindipe/isdrc/compare/v0.3.0...v0.3.1) (2026-09-26)
 
 
