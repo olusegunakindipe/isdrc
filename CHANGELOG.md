@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.0](https://github.com/olusegunakindipe/isdrc/compare/v0.3.2...v0.4.0) (2026-09-26)
+
+
+### Features
+
+* send Connect form submissions via Resend ([#11](https://github.com/olusegunakindipe/isdrc/issues/11)) ([c127fc7](https://github.com/olusegunakindipe/isdrc/commit/c127fc7494852f9825a6a2857aefd64db549a285))
+
 ## [0.3.2](https://github.com/olusegunakindipe/isdrc/compare/v0.3.1...v0.3.2) (2026-09-26)
 
 
