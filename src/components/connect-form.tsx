@@ -30,7 +30,6 @@ export function ConnectForm() {
       surname: "",
       email: "",
       phone: "",
-      whatsapp: "",
       message: "",
     },
   });
@@ -76,13 +75,13 @@ export function ConnectForm() {
             name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="sr-only">Name</FormLabel>
+                <FormLabel className="sr-only">First Name</FormLabel>
                 <FormControl>
                   <Input
                     id="connect-name"
-                    placeholder="Name"
+                    placeholder="First Name"
                     {...field}
-                    className="rounded-sm border-gray-300"
+                    className="h-12 rounded-sm border-gray-300 px-4"
                   />
                 </FormControl>
                 <FormMessage />
@@ -94,13 +93,13 @@ export function ConnectForm() {
             name="surname"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="sr-only">Surname</FormLabel>
+                <FormLabel className="sr-only">Last Name</FormLabel>
                 <FormControl>
                   <Input
                     id="connect-surname"
-                    placeholder="Surname"
+                    placeholder="Last Name"
                     {...field}
-                    className="rounded-sm border-gray-300"
+                    className="h-12 rounded-sm border-gray-300 px-4"
                   />
                 </FormControl>
                 <FormMessage />
@@ -122,7 +121,7 @@ export function ConnectForm() {
                     type="email"
                     placeholder="Email"
                     {...field}
-                    className="rounded-sm border-gray-300"
+                    className="h-12 rounded-sm border-gray-300 px-4"
                   />
                 </FormControl>
                 <FormMessage />
@@ -131,7 +130,7 @@ export function ConnectForm() {
           />
         </div>
 
-        <div className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2">
+        <div className="mt-5">
           <FormField
             control={form.control}
             name="phone"
@@ -144,25 +143,7 @@ export function ConnectForm() {
                     type="tel"
                     placeholder="Phone"
                     {...field}
-                    className="rounded-sm border-gray-300"
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="whatsapp"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="sr-only">WhatsApp</FormLabel>
-                <FormControl>
-                  <Input
-                    id="connect-whatsapp"
-                    placeholder="WhatsApp"
-                    {...field}
-                    className="rounded-sm border-gray-300"
+                    className="h-12 rounded-sm border-gray-300 px-4"
                   />
                 </FormControl>
                 <FormMessage />
@@ -182,9 +163,9 @@ export function ConnectForm() {
                   <Textarea
                     id="connect-message"
                     placeholder="Your message..."
-                    rows={5}
+                    rows={8}
                     {...field}
-                    className="resize-none rounded-sm border-gray-300"
+                    className="min-h-40 resize-none rounded-sm border-gray-300 px-4 py-3"
                   />
                 </FormControl>
                 <FormMessage />

@@ -26,7 +26,7 @@ export async function POST(req: Request) {
     );
   }
 
-  const { name, surname, email, phone, whatsapp, message } = parsed.data;
+  const { name, surname, email, phone, message } = parsed.data;
 
   const resend = new Resend(apiKey);
 
@@ -39,7 +39,6 @@ export async function POST(req: Request) {
       `Name: ${name} ${surname}`,
       `Email: ${email}`,
       phone ? `Phone: ${phone}` : null,
-      whatsapp ? `WhatsApp: ${whatsapp}` : null,
       "",
       "Message:",
       message,
