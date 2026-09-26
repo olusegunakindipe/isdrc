@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.1](https://github.com/olusegunakindipe/isdrc/compare/v0.4.0...v0.4.1) (2026-09-26)
+
+
+### Bug Fixes
+
+* simplify Connect form fields and improve input sizing ([#13](https://github.com/olusegunakindipe/isdrc/issues/13)) ([fad29a7](https://github.com/olusegunakindipe/isdrc/commit/fad29a7ef16a00cd867138cc68b4a6663b1c3358))
+
 ## [0.4.0](https://github.com/olusegunakindipe/isdrc/compare/v0.3.2...v0.4.0) (2026-09-26)
 
 
