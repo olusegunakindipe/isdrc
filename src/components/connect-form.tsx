@@ -5,7 +5,6 @@ import { useForm } from "react-hook-form";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2, Send } from "lucide-react";
-import { z } from "zod";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -18,20 +17,11 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-
-const contactSchema = z.object({
-  name: z.string().min(2, "Name must be at least 2 characters"),
-  surname: z.string().min(2, "Surname must be at least 2 characters"),
-  email: z.string().email("Please enter a valid email address"),
-  phone: z.string().optional(),
-  whatsapp: z.string().optional(),
-  message: z.string().min(10, "Message must be at least 10 characters"),
-});
-
-type ContactFormValues = z.infer<typeof contactSchema>;
+import { type ContactFormValues, contactSchema } from "@/lib/contact-schema";
 
 export function ConnectForm() {
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState(false);
 
   const form = useForm<ContactFormValues>({
     resolver: zodResolver(contactSchema),
@@ -46,10 +36,18 @@ export function ConnectForm() {
   });
 
   async function onSubmit(values: ContactFormValues) {
-    // Replace with your actual API call
-    await new Promise((r) => setTimeout(r, 1000));
-    console.log("Form submitted:", values);
-    setSubmitted(true);
+    setError(false);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(values),
+      });
+      if (!res.ok) throw new Error("Request failed");
+      setSubmitted(true);
+    } catch {
+      setError(true);
+    }
   }
 
   if (submitted) {
@@ -194,6 +192,13 @@ export function ConnectForm() {
             )}
           />
         </div>
+
+        {error && (
+          <p className="mt-4 text-sm font-medium text-destructive">
+            Something went wrong sending your message. Please try again, or
+            email us directly.
+          </p>
+        )}
 
         <Button
           type="submit"
