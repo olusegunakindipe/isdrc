@@ -3,6 +3,7 @@ import Image from "next/image";
 
 import { PageHero } from "@/components/layout/page-hero";
 import { Separator } from "@/components/ui/separator";
+import { getInitials } from "@/lib/utils";
 import { getAdvisoryMembers, getAdvisoryPage } from "@/sanity/lib/fetch";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -50,11 +51,7 @@ export default async function AdvisoryBoardPage() {
                         />
                       ) : (
                         <div className="flex h-full w-full items-center justify-center text-2xl font-bold text-isdrc-navy">
-                          {member.name
-                            .split(" ")
-                            .map((n) => n[0])
-                            .slice(0, 2)
-                            .join("")}
+                          {getInitials(member.name)}
                         </div>
                       )}
                     </div>

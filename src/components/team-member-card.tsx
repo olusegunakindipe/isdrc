@@ -6,6 +6,8 @@ import Image from "next/image";
 
 import { ChevronDown, ChevronUp } from "lucide-react";
 
+import { getInitials } from "@/lib/utils";
+
 export function TeamMemberCard({
   name,
   role,
@@ -33,11 +35,7 @@ export function TeamMemberCard({
             />
           ) : (
             <div className="flex h-full w-full items-center justify-center text-2xl font-bold text-isdrc-navy">
-              {name
-                .split(" ")
-                .map((n) => n[0])
-                .slice(0, 2)
-                .join("")}
+              {getInitials(name)}
             </div>
           )}
         </div>
