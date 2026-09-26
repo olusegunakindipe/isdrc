@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.1](https://github.com/olusegunakindipe/isdrc/compare/v0.3.0...v0.3.1) (2026-09-26)
+
+
+### Bug Fixes
+
+* center hero content, standardize CTA buttons, fix mobile nav sheet ([#7](https://github.com/olusegunakindipe/isdrc/issues/7)) ([baef908](https://github.com/olusegunakindipe/isdrc/commit/baef9088a65d8075652c21358e782ae0035bbf01))
+
 ## [0.3.0](https://github.com/olusegunakindipe/isdrc/compare/v0.2.0...v0.3.0) (2026-09-25)
 
 
