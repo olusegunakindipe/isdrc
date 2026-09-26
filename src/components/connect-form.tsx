@@ -198,7 +198,7 @@ export function ConnectForm() {
         <Button
           type="submit"
           disabled={form.formState.isSubmitting}
-          className="mt-6 w-full rounded-sm bg-isdrc-green font-bold tracking-widest text-white uppercase hover:bg-[#245628]"
+          className="mt-6 h-12 w-full justify-center rounded-sm bg-isdrc-green px-8 font-bold tracking-widest text-white uppercase hover:bg-[#245628]"
         >
           {form.formState.isSubmitting ? (
             <>

@@ -207,7 +207,7 @@ export function Footer({
             )}
             <Button
               asChild
-              className="rounded-sm bg-isdrc-green px-6 font-bold tracking-widest text-white uppercase hover:bg-[#245628]"
+              className="h-12 justify-center rounded-sm bg-isdrc-green px-8 font-bold tracking-widest text-white uppercase hover:bg-[#245628]"
             >
               <Link href="/connect">{contactButtonLabel}</Link>
             </Button>
