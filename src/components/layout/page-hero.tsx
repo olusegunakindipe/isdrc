@@ -23,7 +23,7 @@ export function PageHero({ src, alt = "", title, subtitle }: PageHeroProps) {
       />
       <div className="hero-overlay absolute inset-0" aria-hidden="true" />
       {(title || subtitle) && (
-        <div className="relative z-10 mx-auto flex h-full max-w-7xl flex-col items-start justify-end px-6 pb-10 md:px-16">
+        <div className="relative z-10 mx-auto flex h-full max-w-7xl flex-col items-start justify-center px-6 md:px-16">
           {title && (
             <h1 className="font-heading text-3xl font-bold tracking-tight text-white md:text-5xl">
               {title}

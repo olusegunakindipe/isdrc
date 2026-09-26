@@ -7,9 +7,15 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import { ChevronDown, Menu, X } from "lucide-react";
+import { VisuallyHidden } from "radix-ui";
 
 import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import {
+  Sheet,
+  SheetContent,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 import { NAV_ITEMS } from "@/config/site";
 import { cn } from "@/lib/utils";
 
@@ -186,7 +192,14 @@ export function Navbar({
               <Menu className="h-6 w-6" />
             </Button>
           </SheetTrigger>
-          <SheetContent side="right" className="w-80 bg-white p-0">
+          <SheetContent
+            side="right"
+            className="w-80 bg-white p-0"
+            showCloseButton={false}
+          >
+            <VisuallyHidden.Root>
+              <SheetTitle>Navigation menu</SheetTitle>
+            </VisuallyHidden.Root>
             <div className="flex items-center justify-between gap-3 border-b border-border p-4">
               <Image
                 src={logoUrl}

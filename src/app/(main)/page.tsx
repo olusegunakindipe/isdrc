@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import {
   getApproachPillars,
   getHomePage,
@@ -42,7 +43,7 @@ export default async function HomePage() {
   return (
     <>
       <section
-        className="relative flex min-h-[78vh] w-full items-end overflow-hidden md:min-h-[min(88vh,820px)]"
+        className="relative flex min-h-[78vh] w-full items-center overflow-hidden md:min-h-[min(88vh,820px)]"
         aria-label="Home overview"
       >
         <Image
@@ -85,17 +86,18 @@ export default async function HomePage() {
                   ];
 
             return (
-              <div className="mt-8 flex flex-wrap gap-3">
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
                 {buttons.map((cta, index) => (
                   <Button
                     key={`${cta.label}-${index}`}
                     asChild
                     variant={index === 0 ? "default" : "outline"}
-                    className={
+                    className={cn(
+                      "h-12 w-full justify-center rounded-sm px-8 font-semibold tracking-wide sm:w-auto",
                       index === 0
-                        ? "rounded-sm bg-isdrc-green px-7 font-semibold tracking-wide text-white hover:bg-[#245628]"
-                        : "rounded-sm border-white/70 bg-transparent px-7 font-semibold tracking-wide text-white hover:bg-white hover:text-isdrc-navy"
-                    }
+                        ? "bg-isdrc-green text-white hover:bg-[#245628]"
+                        : "border-white/70 bg-transparent text-white hover:bg-white hover:text-isdrc-navy"
+                    )}
                   >
                     <Link href={cta.url!.trim()}>
                       {cta.label!.trim()}
@@ -221,10 +223,10 @@ export default async function HomePage() {
                 {home.ctaBody}
               </p>
             )}
-            <div className="flex flex-wrap justify-center gap-3">
+            <div className="mx-auto flex max-w-sm flex-col gap-3 sm:max-w-none sm:flex-row sm:flex-wrap sm:justify-center">
               <Button
                 asChild
-                className="rounded-sm bg-isdrc-green px-8 font-semibold tracking-wide text-white hover:bg-[#245628]"
+                className="h-12 w-full justify-center rounded-sm bg-isdrc-green px-8 font-semibold tracking-wide text-white hover:bg-[#245628] sm:w-auto"
               >
                 <Link href="/publications">
                   Publications
@@ -234,7 +236,7 @@ export default async function HomePage() {
               <Button
                 asChild
                 variant="outline"
-                className="rounded-sm border-isdrc-navy px-8 font-semibold tracking-wide text-isdrc-navy hover:bg-isdrc-navy hover:text-white"
+                className="h-12 w-full justify-center rounded-sm border-isdrc-navy px-8 font-semibold tracking-wide text-isdrc-navy hover:bg-isdrc-navy hover:text-white sm:w-auto"
               >
                 <Link href="/events">Events</Link>
               </Button>
