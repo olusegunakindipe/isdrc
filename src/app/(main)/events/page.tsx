@@ -14,6 +14,7 @@ import {
   CardHeader,
 } from "@/components/ui/card";
 import { formatDateShort } from "@/lib/format-date";
+import { truncateText } from "@/lib/utils";
 import { getEvents, getEventsPage } from "@/sanity/lib/fetch";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -63,19 +64,19 @@ export default async function EventsPage() {
               return (
                 <Card
                   key={event._id}
-                  className="group flex flex-col overflow-hidden rounded-sm border border-border shadow-none transition-shadow hover:shadow-sm"
+                  className="group flex flex-col overflow-hidden rounded-sm border border-border pt-0 shadow-none transition-shadow hover:shadow-sm"
                 >
-                  <div className="relative h-44 w-full overflow-hidden bg-isdrc-navy/10">
-                    {event.imageUrl ? (
+                  {event.imageUrl && (
+                    <div className="relative h-56 w-full overflow-hidden bg-isdrc-navy/10">
                       <Image
                         src={event.imageUrl}
                         alt={event.title}
                         fill
                         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                        className="object-cover transition-transform duration-300 group-hover:scale-105"
+                        className="object-cover object-top transition-transform duration-300 group-hover:scale-105"
                       />
-                    ) : null}
-                  </div>
+                    </div>
+                  )}
 
                   <CardHeader className="pb-2">
                     {dateLabel && (
@@ -111,8 +112,8 @@ export default async function EventsPage() {
 
                   <CardContent className="flex-1 pb-2">
                     {event.summary && (
-                      <p className="line-clamp-3 text-sm leading-relaxed text-slate-700">
-                        {event.summary}
+                      <p className="text-sm leading-relaxed text-slate-700">
+                        {truncateText(event.summary, 140)}
                       </p>
                     )}
                   </CardContent>

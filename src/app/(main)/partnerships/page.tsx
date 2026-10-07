@@ -32,9 +32,22 @@ export default async function PartnershipsPage() {
 
       <div className="mx-auto max-w-7xl px-6 py-14 md:px-16">
         {partners.length === 0 ? (
-          <p className="rounded-sm border border-dashed border-border bg-muted/40 px-6 py-12 text-center text-sm text-muted-foreground">
-            Partnerships will appear here once added in Studio.
-          </p>
+          <div className="rounded-sm border border-dashed border-border bg-muted/40 px-6 py-14 text-center">
+            <p className="font-heading text-lg font-bold tracking-tight text-isdrc-navy md:text-xl">
+              No partnerships yet
+            </p>
+            <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-muted-foreground">
+              We&apos;re always open to working with organisations that share
+              our mission. If you&apos;d like to explore a partnership,{" "}
+              <Link
+                href="/connect"
+                className="font-semibold text-isdrc-navy underline-offset-2 hover:underline"
+              >
+                get in touch
+              </Link>
+              .
+            </p>
+          </div>
         ) : (
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
             {partners.map((partner) => (
