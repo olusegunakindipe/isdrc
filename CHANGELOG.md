@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.4.1](https://github.com/olusegunakindipe/isdrc/compare/v0.4.0...v0.4.1) (2026-10-07)
+
+
+### Bug Fixes
+
+* align event card images and clean up truncation/empty states ([#15](https://github.com/olusegunakindipe/isdrc/issues/15)) ([0432cb7](https://github.com/olusegunakindipe/isdrc/commit/0432cb7aaa0c88dd82e63c2ada7fed6b51ec8b9f))
+* simplify Connect form fields and improve input sizing ([#13](https://github.com/olusegunakindipe/isdrc/issues/13)) ([fad29a7](https://github.com/olusegunakindipe/isdrc/commit/fad29a7ef16a00cd867138cc68b4a6663b1c3358))
+
 ## [0.4.0](https://github.com/olusegunakindipe/isdrc/compare/v0.3.2...v0.4.0) (2026-09-26)
 
 
